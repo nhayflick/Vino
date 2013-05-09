@@ -5,6 +5,8 @@ window.VI = {
   Routers: {},
   Store: {},
 
+  //trying to fix
+
   initialize: function(queries, $navcontent, $main, $content) {
     var that = this;
     VI.Store.Queries = new VI.Collections.Queries(queries);
