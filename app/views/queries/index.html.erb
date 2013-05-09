@@ -1,0 +1,24 @@
+<div class="main span6 offset3">
+</div>
+<div class="content span10 offset1">
+</div>
+
+
+<script>
+
+  var queries = <%= @queries.to_json.html_safe%>;
+  var $navContent = $("#nav-content");
+  var $main = $(".main");
+  var $content = $(".content");
+
+  $(function(){
+    window.VI.initialize(
+      queries,
+      $navContent,
+      $main,
+      $content
+    )
+
+});
+
+</script>
