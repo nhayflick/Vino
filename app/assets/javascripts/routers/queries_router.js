@@ -22,7 +22,6 @@ VI.Routers.QueriesRouter = Backbone.Router.extend({
       that.$contentEl.append(showResults.render().$el);
     };
     results.twitterFetch(queryString, fetchCallback);
-    // resultsView.scrollToFirst();
   }
 
 

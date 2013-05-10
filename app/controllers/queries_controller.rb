@@ -11,10 +11,11 @@ class QueriesController < ApplicationController
   end
 
   def create
-
-  end
-
-  def show
-
+    @query = Query.new(params[:query])
+    if @query.save
+      render :json => @query
+    else
+      render :json => @query.errors, :status => 422
+    end
   end
 end

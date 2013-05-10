@@ -12,28 +12,9 @@ VI.Views.ResultsView = Backbone.View.extend({
     console.log("init")
     var that = this;
 
-    that.listenToOnce(that.collection, 'change', that.scrollToFirst());
+    that.listenToOnce(that.collection, 'add', that.scrollToFirst());
 
-    var opts = {
-      lines: 11, // The number of lines to draw
-      length: 17, // The length of each line
-      width: 11, // The line thickness
-      radius: 30, // The radius of the inner circle
-      corners: 0.8, // Corner roundness (0..1)
-      rotate: 42, // The rotation offset
-      direction: 1, // 1: clockwise, -1: counterclockwise
-      color: '#000', // #rgb or #rrggbb
-      speed: 1, // Rounds per second
-      trail: 55, // Afterglow percentage
-      shadow: false, // Whether to render a shadow
-      hwaccel: false, // Whether to use hardware acceleration
-      className: 'spinner', // The CSS class to assign to the spinner
-      zIndex: 2e9, // The z-index (defaults to 2000000000)
-      top: 'auto', // Top position relative to parent in px
-      left: 'auto' // Left position relative to parent in px
-    };
-    var target = $(".body");
-    var spinner = new Spinner(opts).spin(target);
+  
 
 
   //   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
@@ -54,11 +35,12 @@ VI.Views.ResultsView = Backbone.View.extend({
   },
 
   scrollToFirst: function() {
+    console.log("scrolled")
     var that = this
     setTimeout(function(){
       video = $(".vine").first().find("video")
       that.playFirst(video);
-    }, 3000);
+    }, 5000);
     setTimeout(function(){
       that.scrollHeight += ($(".content").offset().top);
       that.liOffset = that.scrollHeight - 230;

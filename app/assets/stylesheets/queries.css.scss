@@ -16,11 +16,18 @@
   display:inline;
 }
 
+.queries {
+  list-style-type: none;
+  text-align: center;
+}
+
 .all-vines {}
 
-.floating-link {
+.play-link {
+  position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 30px;
+
   }
 
 .main-page {margin-top: 360px; 

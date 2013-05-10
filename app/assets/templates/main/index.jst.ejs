@@ -3,9 +3,15 @@
 <input type="text" class="search-query">
 </p>
 
-<a href="#" >Play</a>
-play
 
 
 <button class="btn btn-primary search">Search</button>
+
+<ul class="queries">
+<% VI.Store.Queries.each(function(query){%>
+<li> <%= query.escape("body")%> </li>
+<%})%>
+</ul>
 </div>
+
+<a href="#" class="floating-link" >Play</a>
