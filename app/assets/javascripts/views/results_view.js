@@ -42,10 +42,10 @@ VI.Views.ResultsView = Backbone.View.extend({
       that.playFirst(video);
     }, 5000);
     setTimeout(function(){
-      that.scrollHeight += ($(".content").offset().top);
-      that.liOffset = that.scrollHeight - 230;
+      that.scrollHeight += ($(".content").offset().top - 70);
+      that.liOffset = that.scrollHeight - 370;
       $("html,body").animate({ scrollTop: that.scrollHeight}, "slow");
-      console.log(document.elementFromPoint(300, ($(window).scrollTop() + 200)));
+      // console.log(document.elementFromPoint(300, ($(window).scrollTop() + 400)));
       $(".navbar").slideDown();
     }, 1000);  
   },
@@ -108,9 +108,9 @@ VI.Views.ResultsView = Backbone.View.extend({
     screenOffset = $(window).scrollTop()
     // console.log(screenOffset)
     $(".vine").each(function(i){
-      // console.log(that.findTopOffset(this));
-      // console.log(((that.findTopOffset(this) - screenOffset + 160) <= 545))
-      if((that.findTopOffset(this) - screenOffset) + 500 <= 545) {
+      console.log(that.findTopOffset(this));
+      console.log(((that.findTopOffset(this) - screenOffset + 360) <= 545))
+      if((that.findTopOffset(this) - screenOffset) + 360 <= 545) {
         that.target = this;
         // return false;
       }

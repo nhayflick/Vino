@@ -1,7 +1,7 @@
 VI.Views.MainView = Backbone.View.extend({
 
   events: {
-    "click button.search": "initiateSearch"
+    "keypress input[type=text]": "initiateSearch"
   },
 
   render: function(){
@@ -15,7 +15,8 @@ VI.Views.MainView = Backbone.View.extend({
     return that;
   },
 
-  initiateSearch: function() {
+  initiateSearch: function(e) {
+    if (e.keyCode != 13) return;
     var that = this;
     var queryString = encodeURIComponent(that.$(".search-query").val())
     Backbone.history.navigate("search?" + queryString, {trigger: true});
