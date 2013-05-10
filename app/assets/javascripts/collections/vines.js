@@ -4,19 +4,19 @@ VI.Collections.Vines = Backbone.Collection.extend({
 
 
 
-  twitterFetch: function(querystring, callback) {
-    var that = this;
-    var query = "vine.co%20" + encodeURIComponent(querystring);
-    var queryModel = new VI.Models.Query({body: querystring});
-    queryModel.save();
-    $.getJSON("http://search.twitter.com/search.json?callback=?",{
-      include_entities: "true",
-      q: query
-    }, function(data) {
-      // console.log(data);
-      that.addFromQuery(data.results, callback);
-    });
-  },
+twitterFetch: function(querystring, callback) {
+  var that = this;
+  var query = "vine.co%20" + encodeURIComponent(querystring);
+  var queryModel = new VI.Models.Query({body: querystring});
+  queryModel.save();
+//   $.getJSON("http://search.twitter.com/search.json?callback=?",{
+//     include_entities: "true",
+//     q: query
+//   }, function(data) {
+//     // console.log(data);
+//     that.addFromQuery(data.results, callback);
+//   });
+// },
 
 //git push heroku production:master
 
@@ -26,19 +26,19 @@ VI.Collections.Vines = Backbone.Collection.extend({
 //   }
 // });
 
-        // $.ajax({
-        //   url: 'http://search.twitter.com/search',
-        //   type: 'GET',
-        //   dataType: 'json',
-        //   data: {
-        //     include_entities: 'true',
-        //     q: query
-        //   },
-        //   success: function() {that.addFromQuery(data.results, callback) },
-        //   error: function() { alert('vino is not pleased') },
-        //   // beforeSend: setHeader
-        // });
-  // },
+        $.ajax({
+          url: 'http://search.twitter.com/search',
+          type: 'GET',
+          dataType: 'jsonp',
+          data: {
+            include_entities: 'true',
+            q: query
+          },
+          success: function() {that.addFromQuery(data.results, callback) },
+          error: function() { alert('vino is not pleased') },
+          // beforeSend: setHeader
+        });
+  },
 
   // setHeader: function(xhr) {
   //   xhr.setRequestHeader('User-Agent', 'Vino/0.5')
