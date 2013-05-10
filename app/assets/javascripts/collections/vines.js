@@ -27,7 +27,7 @@ twitterFetch: function(querystring, callback) {
 // });
 
         $.ajax({
-          url: 'http://search.twitter.com/search',
+          url: 'https://search.twitter.com/search',
           type: 'GET',
           dataType: 'jsonp',
           data: {
