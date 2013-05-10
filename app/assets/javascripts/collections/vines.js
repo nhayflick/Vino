@@ -18,6 +18,18 @@ twitterFetch: function(querystring, callback) {
   });
 },
 
+  // var yql = 'http://query.yahooapis.com/v1/public/yql?'
+  //       + 'q=' + encodeURIComponent('select * from json where url=@url')
+  //       + '&url=http://search.twitter.com/search.json?include_entities=true&q=vine.co%2520pugs'
+  //       + '&format=json&callback=?';
+  // $.getJSON( yql, that.cbFunc);
+
+  // $.get("http://search.twitter.com/search.json?include_entities=true&q=vine.co%2520pugs", function(res) {
+  //   console.log(res);
+  //   console.log($.parseJSON(res.responseText));
+  // });
+
+
 //git push heroku production:master
 
 // $.ajaxSetup({
@@ -26,19 +38,33 @@ twitterFetch: function(querystring, callback) {
 //   }
 // });
 
-  //   $.ajax({
-  //     url: 'https://search.twitter.com/search',
-  //     type: 'GET',
-  //     dataType: 'json',
-  //     data: {
-  //       include_entities: 'true',
-  //       q: query
-  //     },
-  //     success: function() {that.addFromQuery(data.results, callback) },
-  //     error: function() { alert('vino is not pleased') },
-  //     // beforeSend: setHeader
-  //   });
+    // $.ajax({
+    //   url: 'http://www.google.com',
+    //   type: 'GET',
+    //   dataType: 'jsonp',
+    //   success:function(data){
+    //     alert(data);
+    //   }
+    // });
+
+    // $.ajax({
+    //   url: 'http://search.twitter.com/search',
+    //   type: 'GET',
+    //   dataType: 'jsonp',
+    //    async: false,
+    //   data: {
+    //     include_entities: 'true',
+    //     q: query
+    //   },
+    //   success: function() {that.addFromQuery(data.results, callback) },
+    //   error: function() { alert('vino is not pleased') },
+    //   // beforeSend: setHeader
+    // });
   // },
+
+  cbFunc: function(data) {
+    console.log(data);
+  },
 
   // setHeader: function(xhr) {
   //   xhr.setRequestHeader('User-Agent', 'Vino/0.5')

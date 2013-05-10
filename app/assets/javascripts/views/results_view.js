@@ -130,6 +130,10 @@ VI.Views.ResultsView = Backbone.View.extend({
       }
     } while( el = el.offsetParent );
     return offsetTop;
+  },
+
+  findScrollDifference: function(){
+    
   }
 
 });
