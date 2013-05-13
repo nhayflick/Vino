@@ -9,7 +9,7 @@ VI.Views.ResultsView = Backbone.View.extend({
 //This listens for the first Vine li to be appended and then initiates the search scroll
 
   initialize: function() {
-    console.log("init")
+    // console.log("init")
     var that = this;
 
     that.listenToOnce(that.collection, 'add', that.scrollToFirst());
@@ -35,15 +35,15 @@ VI.Views.ResultsView = Backbone.View.extend({
   },
 
   scrollToFirst: function() {
-    console.log("scrolled")
     var that = this
+    // console.log(that.collection)
     setTimeout(function(){
       video = $(".vine").first().find("video")
       that.playFirst(video);
+      that.liOffset = that.findVineOffset();
     }, 5000);
     setTimeout(function(){
       that.scrollHeight += ($(".content").offset().top - 70);
-      that.liOffset = that.scrollHeight - 370;
       $("html,body").animate({ scrollTop: that.scrollHeight}, "slow");
       // console.log(document.elementFromPoint(300, ($(window).scrollTop() + 400)));
       $(".navbar").slideDown();
@@ -108,8 +108,8 @@ VI.Views.ResultsView = Backbone.View.extend({
     screenOffset = $(window).scrollTop()
     // console.log(screenOffset)
     $(".vine").each(function(i){
-      console.log(that.findTopOffset(this));
-      console.log(((that.findTopOffset(this) - screenOffset + 360) <= 545))
+      // console.log(that.findTopOffset(this));
+      // console.log(((that.findTopOffset(this) - screenOffset + 360) <= 545))
       if((that.findTopOffset(this) - screenOffset) + 360 <= 545) {
         that.target = this;
         // return false;
@@ -129,11 +129,17 @@ VI.Views.ResultsView = Backbone.View.extend({
           offsetTop += el.offsetTop;
       }
     } while( el = el.offsetParent );
+    console.log(offsetTop)
     return offsetTop;
   },
 
-  findScrollDifference: function(){
-    
+  findVineOffset: function(){
+    var that = this;
+    // console.log($(".vine:eq(1)"));
+    // console.log(that.findTopOffset($(".vine:eq(1)")));
+    // console.log(that.findTopOffset($(".vine:eq(0)")));
+    console.log(that.findTopOffset($(".vine:eq(1)")) - that.findTopOffset($(".vine:eq(0)")))
+    return that.findTopOffset(".vine:eq(1)") - that.findTopOffset(".vine:eq(0)")
   }
 
 });
