@@ -32,14 +32,14 @@ VI.Views.ResultsView = Backbone.View.extend({
       video = $(".vine").first().find("video")
       that.playVine(video);
     }
-    }, 1000);
+    }, 3000);
     // Scrolls down to the first video
     setTimeout(function(){
       that.scrollHeight += ($(".content").offset().top);
       $("html,body").animate({ scrollTop: that.scrollHeight}, "slow");
       // Unhides the navbar
       $(".navbar").slideDown();
-    }, 1000);  
+    }, 2000);  
   },
 
   scrollToNext: function() {
