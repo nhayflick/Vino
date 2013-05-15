@@ -2,7 +2,7 @@ VI.Views.ShowResults = Backbone.View.extend({
 
   //Append a single Vine to the DOM
 
-  tagName: 'div',
+  tagName: 'li',
   className: 'vine',
 
   render: function(){
