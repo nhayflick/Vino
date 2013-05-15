@@ -9,11 +9,13 @@ body{
 /*    background-image: url("http://www.unsigneddesign.com/Vintage%20Wallpaper%20II/vintage_wallpaper2.jpg");
 */     
 /*       background-image: url("http://www.unsigneddesign.com/VintageWallpaper/Vintage%20Wallpaper/vintagewallpaper4.jpg");
-*/        background-repeat: no-repeat;
+*/      
+        background-repeat: no-repeat;
         background-position: top left;
         background-attachment: fixed;
         background-size:1400px 1100px;
-}
+/*        background-color: rgb(192, 220, 255);
+*/}
 
 
 /*.navbar-inner {

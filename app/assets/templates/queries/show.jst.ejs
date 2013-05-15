@@ -1,5 +1,16 @@
 <div class='center' style="background-color: #FFFFFF; border-radius: 10px; ">
-<video src="<%=vine.escape('url')%>" width="480" height="480" preload="none"controls class="vine-clip"></video>
+<% var v = document.createElement("video"); %>
+<% if (v.canPlayType("video/mp4") == '') { %>
+<iframe class="vine-embed" src="<%=vine.escape('fallback_url')%>/embed/simple" width="480" height="480" frameborder="0"></iframe><script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
+<% } else { %>
+ <video src="<%=vine.escape('url')%>" width="470" height="470" preload="auto" controls class="vine-clip" type="video/mp4"></video>
+<% } %>
+<p>
+<a href="http://www.twitter.com/<%= vine.escape('from_user') %>" target="_blank"><img src="<%= vine.escape("profile_image_url")%>" height=30px width=30px>
+<b><%= vine.escape("from_user_name") %></b></a>
+<br>
 
-<h5><%=vine.escape('text')%></h5>
+
+<i><%=vine.escape("text") %> </i>
+</p>
 </div>

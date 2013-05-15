@@ -8,6 +8,14 @@ VI.Views.IndexQueriesView = Backbone.View.extend({
     "click button.search": "initiateSearch"
   },
 
+  initialize: function() {
+    var that = this;
+    that.collection.on("all", function() {
+      console.log("changed!");
+      that.render();
+    });
+  },
+
   initiateSearch: function() {
     var that = this;
     var queryString = encodeURIComponent(that.$(".search-query").val())

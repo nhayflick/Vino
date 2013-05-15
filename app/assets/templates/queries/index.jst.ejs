@@ -1,3 +1,14 @@
 <input type="text" class="search-query">
 
 <button class="btn btn-primary search">Search</button>
+
+
+<% if(!VI.Store.CurrentlyPlaying.isEmpty()) {%>
+Now Playing:
+
+<a href="http://www.twitter.com/<%= VI.Store.CurrentlyPlaying.first().escape('from_user') %>" target="_blank"><img src="<%= VI.Store.CurrentlyPlaying.first().escape("profile_image_url")%>" height=40px width=40px>
+<b><%= VI.Store.CurrentlyPlaying.first().escape("from_user_name") %></b>:</a>
+
+
+<i><%= VI.Store.CurrentlyPlaying.first().get("text") %> </i>
+<%}%>

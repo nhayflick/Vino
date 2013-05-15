@@ -13,61 +13,30 @@ twitterFetch: function(querystring, callback) {
       include_entities: "true",
       q: query
     }, function(data) {
-    // console.log(data);
+    if(data.next_page) {
+      VI.Store.NextPageURL = data.next_page
+    }
     that.addFromQuery(data.results, callback);
   });
 },
 
-  // var yql = 'http://query.yahooapis.com/v1/public/yql?'
-  //       + 'q=' + encodeURIComponent('select * from json where url=@url')
-  //       + '&url=http://search.twitter.com/search.json?include_entities=true&q=vine.co%2520pugs'
-  //       + '&format=json&callback=?';
-  // $.getJSON( yql, that.cbFunc);
-
-  // $.get("http://search.twitter.com/search.json?include_entities=true&q=vine.co%2520pugs", function(res) {
-  //   console.log(res);
-  //   console.log($.parseJSON(res.responseText));
-  // });
-
-
 //git push heroku production:master
 
-// $.ajaxSetup({
-//   beforeSend: function(request) {
-//     request.setRequestHeader("User-Agent","Vino");
-//   }
-// });
+//Working on fetch-more-results:
 
-    // $.ajax({
-    //   url: 'http://www.google.com',
-    //   type: 'GET',
-    //   dataType: 'jsonp',
-    //   success:function(data){
-    //     alert(data);
-    //   }
-    // });
-
-    // $.ajax({
-    //   url: 'http://search.twitter.com/search',
-    //   type: 'GET',
-    //   dataType: 'jsonp',
-    //    async: false,
-    //   data: {
-    //     include_entities: 'true',
-    //     q: query
-    //   },
-    //   success: function() {that.addFromQuery(data.results, callback) },
-    //   error: function() { alert('vino is not pleased') },
-    //   // beforeSend: setHeader
-    // });
-  // },
-
-  cbFunc: function(data) {
-    console.log(data);
-  },
-
-  // setHeader: function(xhr) {
-  //   xhr.setRequestHeader('User-Agent', 'Vino/0.5')
+  // fetchMoreTweets: function(url, callback) {
+  //   var that = this;
+  //   console.log(url)
+  //   $.getJSON("http://search.twitter.com/search.json?callback=?",{
+  //       include_entities: "true",
+  //       q: url,
+  //       page: 2,
+  //     }, function(data) {
+  //     if(data.next_page) {
+  //       VI.Store.NextPageURL = data.next_page
+  //     }
+  //     that.addFromQuery(data.results, callback);
+  //   });
   // },
 
   addFromQuery: function(data, callback) {
@@ -99,6 +68,7 @@ twitterFetch: function(querystring, callback) {
     var that = this;
     var vineData = ({
       url: endUrl,
+      fallback_url: datum.entities.urls[0].expanded_url,
       from_user: datum.from_user,
       from_user_id: datum.from_user_id,
       from_user_name: datum.from_user_name,
@@ -106,9 +76,11 @@ twitterFetch: function(querystring, callback) {
       profile_image_url: datum.profile_image_url,
       text: datum.text, 
     });
-    newVine = new VI.Models.Vine(vineData);
-    that.add(newVine);
-    console.log(that);
-    callback(newVine);
+    // Ensure Vine Url is unique before adding to collection
+    if (that.findWhere({url: vineData.url}) == undefined) {
+      newVine = new VI.Models.Vine(vineData);
+      that.add(newVine);
+      callback(newVine);
+    }
   }
 });
