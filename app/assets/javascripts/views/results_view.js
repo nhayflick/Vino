@@ -10,65 +10,46 @@ VI.Views.ResultsView = Backbone.View.extend({
 //This listens for the first Vine li to be appended and then initiates the search scroll
 
   initialize: function() {
-    // console.log("init")
     var that = this;
 
     that.listenToOnce(that.collection, 'add', that.scrollToFirst());
-
-  
-
-
-  //   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-    
-  //   var observer = new MutationObserver(function(mutations, observer) {
-  //   // fired when a mutation occurs
-  //     console.log(mutations, observer, "MUTATE");
-  //     that.scrollToFirst();
-  //   });
-
-  //   observer.takeRecords();
-
-  //   observer.observe($(".content")[0], {
-  //     subtree: true,
-  //     attributes: true
-  //   //...
-  //   });
   },
 
   render: function() {
     var that = this;
     var renderedContent = JST["results/index"]();
-    that.$("nav-stuff").remove();
+    // that.$("nav-stuff").remove();
     that.$el.append(renderedContent);
     return that;
   },
 
   scrollToFirst: function() {
     var that = this
-    // console.log(that.collection)
     setTimeout(function(){
     var v = document.createElement("video");
+    // Checks for browser compatibility
     if (v.canPlayType("video/mp4") != '') {
       video = $(".vine").first().find("video")
       that.playVine(video);
     }
-    }, 5000);
+    }, 1000);
+    // Scrolls down to the first video
     setTimeout(function(){
       that.scrollHeight += ($(".content").offset().top);
       $("html,body").animate({ scrollTop: that.scrollHeight}, "slow");
-      // console.log(document.elementFromPoint(300, ($(window).scrollTop() + 400)));
+      // Unhides the navbar
       $(".navbar").slideDown();
-    }, 3000);  
+    }, 1000);  
   },
 
   scrollToNext: function() {
     var that = this
+    // If the user has scrolled on their own, auto-scroll won't fire
     if(that.okToScroll){
       setTimeout(function() {
         that.enableAutoScrollDetector();
       }, 1000)
     that.scrollHeight += that.liOffset;
-    console.log(that.liOffset);
     $("html,body").animate({ scrollTop: that.scrollHeight}, "slow");
     setTimeout(function() {
       that.targetVineOnScreen();
@@ -77,6 +58,8 @@ VI.Views.ResultsView = Backbone.View.extend({
       }, 1000)
     }
   },
+
+  //This disables auto-scroll whenever the user is manually scrolling
 
   enableAutoScrollDetector: function() {
     var that = this;
@@ -104,16 +87,12 @@ VI.Views.ResultsView = Backbone.View.extend({
 
   playVine: function(video) {
     var that = this;
-    // console.log(video);
-    // video.load();
-    // video.get(0).addEventListener("canplay", function(e) {
       video.get(0).play();
+      // Updates the NowPlaying Store with the model of the current Vine
       var nowPlaying = that.collection.findWhere({url: video.attr("src")})
       VI.Store.CurrentlyPlaying.reset(nowPlaying);
-      that.render();
-      console.log("Currently Playing:" + VI.Store.CurrentlyPlaying.first().get("text"));
-    // });
-    // setTimeout(function(){
+      // console.log("Currently Playing:" + VI.Store.CurrentlyPlaying.first().get("text"));
+      //When the video ends, autoscroll to the next video (but first check that this isn't the last vid)
       video.on("ended", function(e) {
         that.disableAutoScrollDetector();
         video.off("ended")
@@ -121,7 +100,6 @@ VI.Views.ResultsView = Backbone.View.extend({
           that.scrollToNext();
         }
       });
-    // }, 2000);
   },
 
   isLast: function(video) {
@@ -133,23 +111,22 @@ VI.Views.ResultsView = Backbone.View.extend({
     }
   },
 
+
+//Helper-function that sets 'target' to the jQuery video object for the current Vine on the screen
   targetVineOnScreen: function() {
     var that = this;
     screenOffset = $(window).scrollTop()
-    // console.log(screenOffset)
     $(".vine").each(function(i){
-      // console.log(that.findTopOffset(this));
-      // console.log(((that.findTopOffset(this) - screenOffset + 360) <= 545))
       if((that.findTopOffset(this) - screenOffset) + 0 <= 545) {
         that.target = this;
-        // return false;
       }
     })
     if (screenOffset == 0) {
       $(".navbar").hide('slide');
     }
-    // that.target = null;
   },
+
+  // Helper function that finds the absolute Y distance of any Dom Element from the top of the window
 
   findTopOffset: function(el){
     var offsetTop = 0;
@@ -163,6 +140,8 @@ VI.Views.ResultsView = Backbone.View.extend({
     return offsetTop;
   },
 
+  //WIP:
+
   // returnMoreResults: function() {
   //   var that = this;
   //   if (VI.Store.NextPageURL){
@@ -174,17 +153,6 @@ VI.Views.ResultsView = Backbone.View.extend({
   //   };
   //     that.collection.fetchMoreTweets(VI.Store.NextPageURL, fetchCallback);
   //   }
-  // }
-
-
-
-  // findVineOffset: function(){
-  //   var that = this;
-  //   // console.log($(".vine:eq(1)"));
-  //   // console.log(that.findTopOffset($(".vine:eq(1)")));
-  //   // console.log(that.findTopOffset($(".vine:eq(0)")));
-  //   console.log(that.findTopOffset($(".vine:eq(1)")) - that.findTopOffset($(".vine:eq(0)")))
-  //   return that.findTopOffset(".vine:eq(1)") - that.findTopOffset(".vine:eq(0)")
   // }
 
 });

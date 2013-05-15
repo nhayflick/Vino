@@ -5,7 +5,6 @@ window.VI = {
   Routers: {},
   Store: {},
 
-  //trying to fix
 
   initialize: function(queries, $navcontent, $main, $content) {
     var that = this;
@@ -16,6 +15,7 @@ window.VI = {
     that.installMainView($main);
     Backbone.history.start();
   },
+
 
   installNav: function(navcontent) {
     var that = this;

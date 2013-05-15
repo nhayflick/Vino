@@ -1,9 +1,3 @@
-<div class="main span6 offset3">
-</div>
-<div class="content span10">
-</div>
-
-
 <script>
 
   var queries = <%= @queries.to_json.html_safe%>;
@@ -13,10 +7,13 @@
 
   $(function(){
 
+    //Browser compatibility test for MP4 video
+
     var v = document.createElement("video");
     if (v.canPlayType("video/mp4") == '') {
       window.alert("Your current browser does not support HTML5 video. For the full Vino experience, please use the latest version of Chrome or Safari.")
     }
+
     window.VI.initialize(
       queries,
       $navContent,

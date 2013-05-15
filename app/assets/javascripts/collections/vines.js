@@ -1,9 +1,9 @@
 VI.Collections.Vines = Backbone.Collection.extend({
   model: VI.Models.Vine,
+  //To improve performance, vine models are stored client-side only.
   sync: function () { return false; },
 
-
-
+//Sends an HTTP request to the Twitter search API for Vine.co links and passes the returned data.
 twitterFetch: function(querystring, callback) {
   var that = this;
   var query = "vine.co%20" + encodeURIComponent(querystring);
@@ -39,23 +39,22 @@ twitterFetch: function(querystring, callback) {
   //   });
   // },
 
+//Checks if each returned tweet has a valid URL before calling the scrapeVine method.
+
   addFromQuery: function(data, callback) {
   var that = this;
   _.each(data, function(datum){
-    console.log(datum)
-    // var regex = /\/\/t\.co/;
-    // url = (regex.exec(datum.text))
-    // console.log(url);
     if(datum.entities.urls){
       that.scrapeVine(datum.entities.urls[0].expanded_url, datum, callback)
     };
   });
   },
 
+  //Performs a YQL HTML scrape on the twitter link to extract a link to the raw video file
+
   scrapeVine: function(url, datum, callback) {
     var that = this;
     $.get(url, function(res) {
-      // console.log(res.responseText)
       regex = /https:\/\/vines\.s3\.amazonaws\.com\/v\/videos\/[^\"]*/
       if (regex.exec(res.responseText)){
         endUrl = regex.exec(res.responseText)[0];
@@ -64,10 +63,14 @@ twitterFetch: function(querystring, callback) {
     });
   },
 
+  //Creates a Backbone model for a single Vine
+
   makeModel: function(endUrl, datum, callback) {
     var that = this;
     var vineData = ({
+      // The amazon s3 video URL
       url: endUrl,
+      // Vine's embed link as a fallback for browsers lacking HTML5 video
       fallback_url: datum.entities.urls[0].expanded_url,
       from_user: datum.from_user,
       from_user_id: datum.from_user_id,
@@ -76,7 +79,7 @@ twitterFetch: function(querystring, callback) {
       profile_image_url: datum.profile_image_url,
       text: datum.text, 
     });
-    // Ensure Vine Url is unique before adding to collection
+    // Ensure Vine URL is unique before adding to collection
     if (that.findWhere({url: vineData.url}) == undefined) {
       newVine = new VI.Models.Vine(vineData);
       that.add(newVine);

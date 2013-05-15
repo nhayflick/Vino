@@ -15,6 +15,9 @@ VI.Views.MainView = Backbone.View.extend({
     return that;
   },
 
+    //Navigates to a hashtag url encompassing the user's current querystring
+
+
   initiateSearch: function(e) {
     if (e.keyCode != 13) return;
     var that = this;

@@ -2,6 +2,8 @@ class QueriesController < ApplicationController
   respond_to :json
   respond_to :html, only: [:index]
 
+  # The Queries controller keeps records of all incoming search queries
+
   def index
     @queries = Query.all
     respond_to do |format|
