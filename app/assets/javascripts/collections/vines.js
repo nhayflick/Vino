@@ -43,6 +43,9 @@ twitterFetch: function(querystring, callback) {
 
   addFromQuery: function(data, callback) {
   var that = this;
+  if (data.length == 0) {
+    window.alert("No results found! Please try a different search query.")
+  };
   _.each(data, function(datum){
     if(datum.entities.urls){
       that.scrapeVine(datum.entities.urls[0].expanded_url, datum, callback)

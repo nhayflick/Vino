@@ -26,12 +26,13 @@ VI.Views.ResultsView = Backbone.View.extend({
   scrollToFirst: function() {
     var that = this
     setTimeout(function(){
-    var v = document.createElement("video");
-    // Checks for browser compatibility
-    if (v.canPlayType("video/mp4") != '') {
-      video = $(".vine").first().find("video")
-      that.playVine(video);
-    }
+      var v = document.createElement("video");
+      // Checks for browser compatibility
+      if (v.canPlayType("video/mp4") != '') {
+        video = $(".vine").first().find("video")
+        console.log("here")
+        that.playVine(video);
+      }
     }, 4000);
     // Scrolls down to the first video
     setTimeout(function(){
