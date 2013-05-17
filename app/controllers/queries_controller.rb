@@ -6,7 +6,7 @@ class QueriesController < ApplicationController
 
   def index
     #returns top 3 trending queries
-    @queries = Query.select("*, count(id) as freq").where('created_at > ?', 5.days.ago).order('freq desc').group('body').limit('3')
+    @queries = Query.select("body, count(id) as freq").where('created_at > ?', 5.days.ago).order('freq desc').group('body').limit('3')
     respond_to do |format|
       format.html {render :index}
       format.json {render :json => @queries}
