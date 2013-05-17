@@ -5,14 +5,20 @@
 <br>
 <br>
 <br>
-<br>
-<br>
 <p>
-<input type="text" class="search-query">
+<input type="text" class="search-query" style="margin: 0 auto;" placeholder="Search" data-provide="typeahead" data-items="4" data-source="["me","you"]">  <button class="btn btn-primary main"><i class="icon-search"></i></button>
+
+<br>
 </p>
-<h5>Search the world of Vines.</h5>
-
-
-<!--button class="btn btn-primary search">Search</button-->
-
+<h5>Explore the world of Vines.
+</h5>
+<span class="badge badge-inverse info-link" title="Vino lets you search Twitter for Vine video clips. It was built by Nathan Hayflick at App Academy in San Francisco." >What's Vino?</span>
+<br>
+Trending: <i><% queries.each(function(query, i) {%>
+<a href="/#/search?<%= query.escape("body")%>"><%= query.get("body") %></a>
+<% if (i < queries.length - 1) {%>
+,
+<%}%>
+<%}); %>
+</i>
 </div>

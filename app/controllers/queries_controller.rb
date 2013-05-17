@@ -5,7 +5,8 @@ class QueriesController < ApplicationController
   # The Queries controller keeps records of all incoming search queries
 
   def index
-    @queries = Query.all
+    #returns top 3 trending queries
+    @queries = Query.select("*, count(id) as freq").where('created_at > ?', 5.days.ago).order('freq desc').group('body').limit('3')
     respond_to do |format|
       format.html {render :index}
       format.json {render :json => @queries}
