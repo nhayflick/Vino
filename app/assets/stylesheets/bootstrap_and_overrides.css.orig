@@ -1,0 +1,32 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+
+body{
+<<<<<<< HEAD
+/*    background-image: url("http://www.unsigneddesign.com/Vintage%20Wallpaper%20II/vintage_wallpaper2.jpg");
+*/     
+       background-image: url("http://www.unsigneddesign.com/10_Subtle_Grunge_Textures/subtlegrunge_7.jpg");
+      
+=======
+        background-image: url("http://www.unsigneddesign.com/10_Subtle_Grunge_Textures/subtlegrunge_7.jpg");
+     
+/*        background-image: url("http://www.unsigneddesign.com/White_Grunge/LT_WhiteGrunge_02.jpg");
+*/      
+>>>>>>> origin/master
+        background-repeat: no-repeat;
+        background-position: top left;
+        background-attachment: fixed;
+        background-size:1400px 1100px;
+/*        background-color: rgb(192, 220, 255);
+*/}
+
+a{color: rgb(55, 49, 219);}
+
+.nav{
+  display:inline-block;
+}
