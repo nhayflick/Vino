@@ -1,0 +1,51 @@
+// Place all the styles related to the Queries controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.vine {margin-top: 25%;
+  margin-bottom: 25%;
+  list-style-type: none;
+  text-align: center;
+  display: inline;
+  background-color: rgb(247, 247, 247);
+  }
+
+.vine-div {
+   background-color: rgb(247, 247, 247);
+   border-radius: 10px;
+   text-align: center;
+}
+
+.vine-clip {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  list-style-type: none;
+  text-align: center;
+  display:inline;
+  background-color: rgb(247, 247, 247);
+}
+
+.queries {
+  list-style-type: none;
+  text-align: center;
+}
+
+.meta-data {
+  list-style-type: none;
+  text-align: center;
+}
+
+.all-vines {  text-align: center;
+              list-style-type: none;
+}
+
+
+.info-link {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  }
+
+.main-page {margin-top: 360px; 
+            margin-bottom: 380px; 
+            text-align: center;}
